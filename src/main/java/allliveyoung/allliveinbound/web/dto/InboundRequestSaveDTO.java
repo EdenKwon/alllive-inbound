@@ -16,6 +16,4 @@ public class InboundRequestSaveDTO {
     private String code;
     private Member member;
     private Warehouse warehouse;
-    private Enum status;
-    private String note;
 }

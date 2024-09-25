@@ -2,13 +2,14 @@ package allliveyoung.allliveinbound.service;
 
 import allliveyoung.allliveinbound.domain.InboundInspection;
 import allliveyoung.allliveinbound.domain.InboundRequest;
+import allliveyoung.allliveinbound.web.dto.InboundInspectionDTO;
 
 import java.util.List;
 
 public interface InboundInspectionService {
-    List<InboundInspection> findInboundInspections();
+    List<InboundInspectionDTO> findInboundInspections();
 
-    InboundInspection findInboundInspection(Long id);
+    InboundInspectionDTO findInboundInspection(Long id);
 
     void updateInboundStatus(Long id, String status);
 }

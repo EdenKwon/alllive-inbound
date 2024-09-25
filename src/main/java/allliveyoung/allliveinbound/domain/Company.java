@@ -6,6 +6,6 @@ import lombok.*;
 @ToString
 @Builder
 @NoArgsConstructor
-@AllArgsConstructor
+//@AllArgsConstructor
 public class Company {
 }

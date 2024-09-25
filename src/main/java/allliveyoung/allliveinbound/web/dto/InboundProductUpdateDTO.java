@@ -1,7 +1,5 @@
 package allliveyoung.allliveinbound.web.dto;
 
-import allliveyoung.allliveinbound.domain.Member;
-import allliveyoung.allliveinbound.domain.Warehouse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,7 +9,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class InboundRequestUpdateDTO {
+public class InboundProductUpdateDTO {
     private Long id;
-    private String status;
+    private int palletQuantity;
+    private int boxQuantity;
+    private String manufactureNum;
+    private String expDate;
 }
