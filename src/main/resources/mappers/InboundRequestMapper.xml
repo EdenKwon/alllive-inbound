@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="allliveyoung.allliveinbound.mapper.InboundRequestMapper">
+
+    <!-- 우선 관리자로 창고 조회, if문으로 사용자 조회까지 넣어야함 -->
+    <select id="findAll" resultType="allliveyoung.allliveinbound.domain.InboundRequest">warehouse_id = #{warehouse_id}
+        SELECT * FROM INBOUND_REQUEST WHERE
+
+            <if test="warehouseId != null">
+                warehouse_id = #{warehouseId}
+            </if>
+            <if test="userId != null">
+                user_id = #{userId}
+            </if>
+
+    </select>
+
+    <select id="findById" resultType="allliveyoung.allliveinbound.domain.InboundRequest">
+        SELECT * FROM INBOUND_REQUEST ir, INBOUND_REQUEST_PRODUCT irp WHERE ir.#{inbound_request_id} = irp.#{inbound_request_id};
+    </select>
+
+    <insert id="save">
+        INSERT INTO inbound_request (warehouse_id, user_id, status, reg_date, mod_date)
+        VALUES (#{warehouseId}, #{userId}, #{status}, NOW(), NOW());
+
+        <foreach collection="products" item="product" separator=";">
+            INSERT INTO INBOUND_REQUEST_PRODUCT (inbound_request_id, product_id, pallet_quantity, box_quantity, manufacture_number, expiration_date)
+            VALUES (#{inboundRequestId}, #{product.productId}, #{product.palletQuantity}, #{product.boxQuantity}, #{product.manufactureNumber}, #{product.expirationDate});
+        </foreach>
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM INBOUND_REQUEST_PRODUCT WHERE inbound_request_id = #{inbound_request_id};
+        DELETE FROM INBOUND_REQUEST WHERE inbound_request_id = #{inbound_request_id};
+    </delete>
+
+    <update id="update" parameterType="InboundRequest">
+        UPDATE INBOUND_REQUEST
+        SET mod_date = NOW()
+        WHERE inbound_request_id = #{inboundRequestId};
+
+        <foreach collection="products" item="product" separator=";">
+            UPDATE INBOUND_REQUEST_PRODUCT
+            SET pallet_quantity = #{product.palletQuantity},
+            box_quantity = #{product.boxQuantity},
+            manufacture_number = #{product.manufactureNumber},
+            expiration_date = #{product.expirationDate}
+            WHERE inbound_product_id = #{product.inboundProductId}
+        </foreach>
+    </update>
+
+    <select id="updateStatus">
+        UPDATE INBOUND_REQUEST SET status = #{status} WHERE inbound_request_id = #{inboundRequestId}
+    </select>
+</mapper>
+
