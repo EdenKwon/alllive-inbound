@@ -10,6 +10,4 @@ public interface InboundInspectionService {
     List<InboundInspectionDTO> findInboundInspections();
 
     InboundInspectionDTO findInboundInspection(Long id);
-
-    void updateInboundStatus(Long id, String status);
 }

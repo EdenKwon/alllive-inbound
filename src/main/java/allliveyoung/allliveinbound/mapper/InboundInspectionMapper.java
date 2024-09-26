@@ -12,6 +12,4 @@ public interface InboundInspectionMapper {
     List<InboundInspection> findAll();
 
     Optional<InboundInspection> findById(Long id);
-
-    void updateStatus(Long id, String status);
 }

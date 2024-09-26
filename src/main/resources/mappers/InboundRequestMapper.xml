@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="allliveyoung.allliveinbound.mapper.InboundRequestMapper">
 
-    <!-- 우선 관리자로 창고 조회, if문으로 사용자 조회까지 넣어야함 -->
+    <!-- 총관리자는 따로 또 해야함-->
     <select id="findAll" resultType="allliveyoung.allliveinbound.domain.InboundRequest">warehouse_id = #{warehouse_id}
         SELECT * FROM INBOUND_REQUEST WHERE
 

@@ -36,9 +36,4 @@ public class InboundInspectionServiceImpl implements InboundInspectionService{
         InboundInspectionDTO inspectionDTO = modelMapper.map(inspection.orElseThrow(), InboundInspectionDTO.class);
         return inspectionDTO;
     }
-
-    @Override
-    public void updateInboundStatus(Long id, String status) {
-        inboundInspectionMapper.updateStatus(id, status);
-    }
 }
