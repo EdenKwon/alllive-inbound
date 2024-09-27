@@ -1,6 +1,6 @@
 package allliveyoung.allliveinbound.web.dto;
 
-import allliveyoung.allliveinbound.domain.Member;
+import allliveyoung.allliveinbound.domain.Company;
 import allliveyoung.allliveinbound.domain.Warehouse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class InboundRequestDTO {
     private Long id;
     private String code;
-    private Member member;
+    private Company company;
     private Warehouse warehouse;
     private String status;
     private LocalDateTime regDate;

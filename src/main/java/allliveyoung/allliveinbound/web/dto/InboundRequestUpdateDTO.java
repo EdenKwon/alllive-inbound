@@ -1,7 +1,5 @@
 package allliveyoung.allliveinbound.web.dto;
 
-import allliveyoung.allliveinbound.domain.Member;
-import allliveyoung.allliveinbound.domain.Warehouse;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

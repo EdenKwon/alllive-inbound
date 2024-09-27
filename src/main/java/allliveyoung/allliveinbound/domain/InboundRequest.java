@@ -13,9 +13,9 @@ import java.util.List;
 public class InboundRequest {
     private Long id;
     private String code;
-    private List<InboundRequestProduct> inboundRequestProducts;
-    private Member member;
+    private Company company;
     private Warehouse warehouse;
-    private enum status {
-    }
+    private String status;
+    private LocalDateTime regDate;
+    private LocalDateTime modDate;
 }

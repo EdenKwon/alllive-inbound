@@ -4,8 +4,10 @@ import lombok.*;
 
 @Getter
 @ToString
-@Builder
+//@Builder
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Warehouse {
+    private Long id;
+    private String name;
 }

@@ -3,9 +3,12 @@ package allliveyoung.allliveinbound.domain;
 import lombok.*;
 
 @Getter
+@Setter
 @ToString
-@Builder
+//@Builder
 @NoArgsConstructor
-//@AllArgsConstructor
+@AllArgsConstructor
 public class Company {
+    private Long id;
+    private String businessNumber;
 }

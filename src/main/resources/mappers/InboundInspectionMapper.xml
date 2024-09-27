@@ -15,7 +15,7 @@
             </if>
         </where>
     </sql>
-    
+
     <select id="findAll" resultType="allliveyoung.allliveinbound.domain.InboundRequest">warehouse_id = #{warehouse_id}
         SELECT * FROM INBOUND_INSPECTION WHERE member_id = #{member_id}
     </select>
