@@ -20,4 +20,6 @@ public class InboundRequestDTO {
     private Warehouse warehouse;
     private String status;
     private LocalDateTime regDate;
+    private LocalDateTime modDate;
+    private String rejectionNote;
 }

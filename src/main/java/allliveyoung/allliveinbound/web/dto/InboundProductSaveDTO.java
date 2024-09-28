@@ -18,7 +18,6 @@ public class InboundProductSaveDTO {
     private int boxQuantity;
     private String manufactureNum;
     private String expDate;
-    private InboundRequest inboundRequest;
-    private Product product;
-    private Member member;
+    private Long inboundRequestId;
+    private Long productId;
 }
