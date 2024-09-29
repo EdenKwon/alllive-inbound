@@ -37,18 +37,20 @@
                         <tr>
                             <th>번호</th>
                             <th>입고요청코드</th>
-                            <th>등록일자</th>
+                            <th>창고명</th>
                             <th>상태</th>
-                            <th>날리거나 살리거나</th>
-                            <th>날리거나 살리거나</th>
+                            <th>요청 회사</th>
+                            <th>등록일자</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr th:each="dto : ${responseDTO.dtoList}">
                             <th scope="row" th:text="${dto.id}"></th>
-                            <td th:text="${dto.id}"></td>
                             <td th:text="${dto.code}"></td>
+                            <td th:text="${dto.warehouse.name}"></td>
                             <td th:text="${dto.status}"></td>
+                            <td th:text="${dto.member.name}"></td>
+                            <td th:text="${dto.regDate}"></td>
                         </tr>
                         </tbody>
                     </table>

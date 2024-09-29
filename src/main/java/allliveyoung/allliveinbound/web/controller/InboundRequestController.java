@@ -31,7 +31,7 @@ public class InboundRequestController {
         }
 
         model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO));
-        return "inbound/inbound-list";
+        return "inbound-list";
     }
 
     @GetMapping("/{id}")
