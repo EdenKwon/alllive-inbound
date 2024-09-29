@@ -13,7 +13,7 @@ import java.util.*;
 public interface InboundRequestMapper {
     List<InboundRequest> findAll();
 
-    Optional<InboundRequest> findById(Long id);
+    List<InboundRequestProduct> findById(@Param("id") Long id);
 
     void save(InboundRequestSaveDTO inboundRequestSaveDTO);
 

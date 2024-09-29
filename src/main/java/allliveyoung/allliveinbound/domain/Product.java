@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 public class Product {
     private Long id;
     private String name;
-    private Member member;
-    private enum storageMethod{}
-    private enum designatedType{}
+    private Long memberId;
+    private String storeTemperature;
+    private String type;
     private LocalDateTime licenseDate;
     private int licenseNum;
 }

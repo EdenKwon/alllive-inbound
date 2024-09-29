@@ -32,9 +32,10 @@ public class InboundRequestServiceImpl implements InboundRequestService {
 
     @Override
     public InboundRequestDTO findInbound(Long id) {
-        Optional<InboundRequest> request = inboundRequestMapper.findById(id);
+        /*Optional<InboundRequest> request = inboundRequestMapper.findById(id);
         InboundRequestDTO inboundRequest = modelMapper.map(request.orElseThrow(),InboundRequestDTO.class);
-        return inboundRequest;
+        return inboundRequest;*/
+        return null;
     }
 
     @Override
