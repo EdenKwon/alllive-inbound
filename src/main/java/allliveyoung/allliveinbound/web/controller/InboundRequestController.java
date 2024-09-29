@@ -1,5 +1,6 @@
 package allliveyoung.allliveinbound.web.controller;
 
+import allliveyoung.allliveinbound.domain.Member;
 import allliveyoung.allliveinbound.service.InboundRequestService;
 import allliveyoung.allliveinbound.web.dto.*;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -35,18 +37,27 @@ public class InboundRequestController {
     }
 
     @GetMapping("/{id}")
-    public String getInboundRequest(Long id, Model model, InboundPageRequestDTO inboundPageRequestDTO) {
+    public String getInboundRequest(@PathVariable Long id, Model model, InboundPageRequestDTO inboundPageRequestDTO) {
         log.info(id);
-        model.addAttribute("inboundRequest", inboundRequestService.findInbound(id));
+        inboundRequestService.findInbound(id).forEach(log::info);
+        model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
+
 
         return "inbound-detail";
     }
 
     @GetMapping("/save")
-    public String getInboundRequestSaveForm() {
+    public String getInboundRequestSaveForm(Member member, Model model) {
         log.info("getInboundRequestSaveForm..........");
+        
+        return "inbound-register";
+    }
 
-        return null;
+    @GetMapping("/{id}/update")
+    public String getInboundRequestUpdateForm(@PathVariable Long id, Model model) {
+        log.info("getInboundRequestUpdateForm..........");
+        model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
+        return "inbound-modify";
     }
 
     @PostMapping("/save")

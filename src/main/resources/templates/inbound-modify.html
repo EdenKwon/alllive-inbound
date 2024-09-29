@@ -65,25 +65,25 @@
                         </tr>
                         </tfoot>
                         <tbody>
-                        <tr>
-                            <td>1</td>
+                        <tr th:each="dto : ${responseDTO}">
+                            <th scope="row" th:text="${dto.id}"></th>
+                            <td th:text="${dto.product.name}"></td>
                             <td>
-                                <select name="option1[]" disabled>
-                                    <option value="A">타이레놀</option>
+                                <select name="palletQuantity" th:value="${dto.palletQuantity}">
+                                    <option th:each="i : ${#numbers.sequence(1, 100)}" th:value="${i}" th:text="${i}" th:selected="${dto.palletQuantity == i}"></option>
                                 </select>
                             </td>
                             <td>
-                                <select name="option2[]">
-                                    <option value="X">10</option>
+                                <select name="boxQuantity" th:value="${dto.boxQuantity}">
+                                    <option th:each="i : ${#numbers.sequence(1, 100)}" th:value="${i}" th:text="${i}" th:selected="${dto.boxQuantity == i}"></option>
                                 </select>
                             </td>
                             <td>
-                                <select name="option3[]">
-                                    <option value="1">50</option>
-                                </select>
+                                <input type="text" name="manufactureNum" th:value="${dto.manufactureNum}">
                             </td>
-                            <td><input type="text" name="textInput[]" value="mdd-001"></td>
-                            <td><input type="date" name="date[]" value="2024-09-26"></td>
+                            <td>
+                                <input type="date" name="expDate" th:value="${dto.expDate}">
+                            </td>
                         </tr>
                         </tbody>
                     </table>
