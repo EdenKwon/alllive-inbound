@@ -31,4 +31,10 @@ public interface InboundRequestMapper {
     List<Warehouse> getWarehouseList();
 
     List<Product> getMatchedProductList(Long id);
+
+    Integer countByStatus(String status);
+
+    List<CountRequestDTO> findCountInbound(Integer year);
+
+    List<CountStockDTO> findCountStock(Integer year);
 }
