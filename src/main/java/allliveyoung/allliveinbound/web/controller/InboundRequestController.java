@@ -9,12 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,7 +35,7 @@ public class InboundRequestController {
     }
 
     @GetMapping("/{id}")
-    public String getInboundRequest(@PathVariable Long id, Model model, InboundPageRequestDTO inboundPageRequestDTO) {
+    public String getInboundRequest(@PathVariable(value = "id") Long id, Model model, InboundPageRequestDTO inboundPageRequestDTO) {
         log.info(id);
         inboundRequestService.findInbound(id).forEach(log::info);
         model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
@@ -47,33 +45,35 @@ public class InboundRequestController {
     }
 
     @GetMapping("/save")
-    public String getInboundRequestSaveForm(Member member, Model model) {
+    public String getInboundRequestSaveForm(Member member, Model model) {//todo 시큐리티 적용
         log.info("getInboundRequestSaveForm..........");
-        
+
+        model.addAttribute("warehouseDTO", inboundRequestService.getWarehouseList());
+        model.addAttribute("matchedProductDTO", inboundRequestService.getMatchedProductList(1L));
         return "inbound-register";
     }
 
     @GetMapping("/{id}/update")
-    public String getInboundRequestUpdateForm(@PathVariable Long id, Model model) {
+    public String getInboundRequestUpdateForm(@PathVariable(value = "id") Long id, Model model) {
         log.info("getInboundRequestUpdateForm..........");
         model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
         return "inbound-modify";
     }
 
     @PostMapping("/save")
-    public String postInboundRequestSaveForm(@Validated InboundRequestSaveDTO inboundRequestSaveDTO, @Validated List<InboundProductSaveDTO> inboundProductSaveDTOS, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String postInboundRequestSaveForm(@ModelAttribute InboundRequestSaveDTO inboundRequestSaveDTO, ArrayList<InboundProductSaveDTO> inboundProductSaveDTOS, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             log.info("has error..........");
             redirectAttributes.addFlashAttribute("error",bindingResult.getAllErrors());
         }
 
-        inboundRequestService.saveInbound(inboundRequestSaveDTO, inboundProductSaveDTOS);
+        inboundRequestService.saveInbound(inboundRequestSaveDTO);
 
         return "redirect:/inbound-requests/{id}";
     }
 
     @PostMapping( "/{id}/delete")
-    public String postInboundRequestDelete(Long id, InboundPageRequestDTO inboundPageRequestDTO, RedirectAttributes redirectAttributes) {
+    public String postInboundRequestDelete(@PathVariable(value = "id") Long id, InboundPageRequestDTO inboundPageRequestDTO, RedirectAttributes redirectAttributes) {
         log.info("delete..........");
         inboundRequestService.deleteInbound(id);
 

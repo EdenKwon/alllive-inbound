@@ -1,8 +1,6 @@
 package allliveyoung.allliveinbound.mapper;
 
-import allliveyoung.allliveinbound.domain.InboundRequest;
-import allliveyoung.allliveinbound.domain.InboundRequestProduct;
-import allliveyoung.allliveinbound.domain.Warehouse;
+import allliveyoung.allliveinbound.domain.*;
 import allliveyoung.allliveinbound.web.dto.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +27,8 @@ public interface InboundRequestMapper {
     void updateStatus(Map<String, Object> map);
 
     int getCount(InboundPageRequestDTO inboundPageRequestDTO);
+
+    List<Warehouse> getWarehouseList();
+
+    List<Product> getMatchedProductList(Long id);
 }
