@@ -13,5 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 public class InboundRequestUpdateDTO {
     private Long id;
-    private List<InboundProductUpdateDTO> inboundProductUpdateDTOS;
+    private List<InboundProductUpdateDTO> inboundProductUpdateDTOList;
 }

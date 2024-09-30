@@ -57,7 +57,7 @@ public class InboundRequestServiceImpl implements InboundRequestService {
     @Override
     public void updateInbound(Long id, InboundRequestUpdateDTO inboundRequestUpdateDTO) {
         inboundRequestMapper.update(id);
-        inboundRequestMapper.updateProducts(inboundRequestUpdateDTO.getInboundProductUpdateDTOS());
+        inboundRequestMapper.updateProducts(inboundRequestUpdateDTO.getInboundProductUpdateDTOList());
     }
 
     @Override
