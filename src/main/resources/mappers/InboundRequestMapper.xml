@@ -210,13 +210,13 @@
         select count(inbound_request_id) from inbound_request
     </select>
 
-    <resultMap id="countInbound" type="com.all_live_young_wms_local.web.dto.CountRequestDTO">
+    <resultMap id="countInbound" type="allliveyoung.allliveinbound.web.dto.CountRequestDTO">
         <result property="year" column="YEAR(reg_date)"/>
         <result property="month" column="MONTH(reg_date)"/>
         <result property="count" column="COUNT(inbound_request_id)"/>
     </resultMap>
 
-    <resultMap id="countStock" type="com.all_live_young_wms_local.web.dto.CountStockDTO">
+    <resultMap id="countStock" type="allliveyoung.allliveinbound.web.dto.CountStockDTO">
         <result property="name" column="product_name"/>
         <result property="count" column="count"/>
     </resultMap>

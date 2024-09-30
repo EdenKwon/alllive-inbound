@@ -5,11 +5,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class InboundRequestUpdateDTO {
     private Long id;
-    private String status;
+    private List<InboundProductUpdateDTO> inboundProductUpdateDTOS;
 }
