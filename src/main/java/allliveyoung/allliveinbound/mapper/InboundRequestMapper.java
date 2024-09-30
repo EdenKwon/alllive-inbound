@@ -13,7 +13,7 @@ public interface InboundRequestMapper {
 
     List<InboundRequestProduct> findById(@Param("id") Long id);
 
-    void save(InboundRequestSaveDTO inboundRequestSaveDTO);
+    Long save(InboundRequestSaveDTO inboundRequestSaveDTO);
 
     void saveProducts(List<InboundProductSaveDTO> inboundProductSaveDTOList);
 

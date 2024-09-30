@@ -48,9 +48,9 @@ public class InboundRequestServiceImpl implements InboundRequestService {
 
     @Override
     public Long saveInbound(InboundRequestSaveDTO inboundRequestSaveDTO) {
-        inboundRequestMapper.save(inboundRequestSaveDTO);
+        Long id = inboundRequestMapper.save(inboundRequestSaveDTO);
+        log.info("{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{id = " + id);
         /*inboundRequestMapper.saveProducts(inboundRequestSaveDTO.getInboundProductSaveDTOList());*/
-        Long id = inboundRequestSaveDTO.getId();
         return id;
     }
 
