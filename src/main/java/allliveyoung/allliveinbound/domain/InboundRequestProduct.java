@@ -6,7 +6,6 @@ import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import java.time.LocalDateTime;
 
 @Getter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

@@ -3,8 +3,6 @@ package allliveyoung.allliveinbound.domain;
 import lombok.*;
 
 @Getter
-@Setter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
