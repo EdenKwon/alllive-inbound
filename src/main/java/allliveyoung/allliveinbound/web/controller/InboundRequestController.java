@@ -68,13 +68,9 @@ public class InboundRequestController {
                                              Model model) {
 
         Long savedId = inboundRequestService.saveInbound(inboundRequestSaveDTO);
-        log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        log.info("inboundRequestSaveDTO = " + inboundRequestSaveDTO);
-        log.info("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         redirectAttributes.addAttribute("id", savedId);
 
-        // 리다이렉트 URL에 플레이스홀더 대신 실제 값 사용
         return "redirect:/inbound-requests/{id}";
     }
 

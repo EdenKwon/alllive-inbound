@@ -54,16 +54,6 @@
                             <th>유효기간</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                        <tr>
-                            <th>번호</th>
-                            <th>의약품</th>
-                            <th>파레트 수량</th>
-                            <th>박스 수량</th>
-                            <th>제조번호</th>
-                            <th>유효기간</th>
-                        </tr>
-                        </tfoot>
                         <tbody>
                         <tr th:each="dto : ${responseDTO}">
                             <th scope="row" th:text="${dto.id}"></th>
