@@ -54,7 +54,7 @@
         <result property="palletQuantity" column="pallet_quantity"/>
         <result property="boxQuantity" column="box_quantity"/>
         <result property="manufactureNum" column="manufacture_number"/>
-        <result property="expDate" column="expiration_date"/>
+        <result property="expirationDate" column="expiration_date"/>
         <association property="inboundRequest" javaType="allliveyoung.allliveinbound.domain.InboundRequest" column="inbound_request_id" select="allliveyoung.allliveinbound.mapper.InboundRequestMapper.findInboundRequest">
         </association>
         <association property="product" javaType="allliveyoung.allliveinbound.domain.Product" column="product_id" select="allliveyoung.allliveinbound.mapper.InboundRequestMapper.findProduct">
@@ -155,7 +155,7 @@
         (pallet_quantity, box_quantity, manufacture_number, expiration_date, inbound_request_id, product_id)
         VALUES
         <foreach collection="inboundProductSaveDTOList" item="product" separator=",">
-            (#{product.palletQuantity}, #{product.boxQuantity}, #{product.manufactureNum}, #{product.expDate}, LAST_INSERT_ID(), #{product.productId})
+            (#{product.palletQuantity}, #{product.boxQuantity}, #{product.manufactureNum}, #{product.expirationDate}, LAST_INSERT_ID(), #{product.productId})
         </foreach>
     </insert>
 
@@ -197,7 +197,7 @@
         expiration_date = CASE
         <foreach collection="list" item="item">
             WHEN inbound_request_product_id = #{item.id} AND inbound_request_id = #{item.inboundRequestId}
-            THEN #{item.expDate}
+            THEN #{item.expirationDate}
         </foreach>
         ELSE expiration_date END
         WHERE inbound_request_product_id IN

@@ -17,7 +17,7 @@ public class InboundProductDTO {
     private int palletQuantity;
     private int boxQuantity;
     private String manufactureNum;
-    private String expDate;
+    private String expirationDate;
     private InboundRequest inboundRequest;
     private Product product;
     private Member member;

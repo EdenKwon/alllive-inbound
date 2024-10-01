@@ -15,5 +15,5 @@ public class InboundProductUpdateDTO {
     private int palletQuantity;
     private int boxQuantity;
     private String manufactureNum;
-    private String expDate;
+    private String expirationDate;
 }
