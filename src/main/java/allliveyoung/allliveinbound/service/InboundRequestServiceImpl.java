@@ -32,6 +32,7 @@ public class InboundRequestServiceImpl implements InboundRequestService {
                 .map(request -> modelMapper.map(request,InboundRequestDTO.class)).collect(Collectors.toList());
 
         int total = inboundRequestMapper.getCount(inboundPageRequestDTO, member);
+        log.info(total);
 
         InboundPageResponseDTO<InboundRequestDTO> responseDTO = InboundPageResponseDTO.<InboundRequestDTO>withAll()
                 .dtoList(requests).total(total).inboundPageRequestDTO(inboundPageRequestDTO).build();
@@ -69,6 +70,7 @@ public class InboundRequestServiceImpl implements InboundRequestService {
 
     @Override
     public void updateInboundStatus(Long id, String status) {
+        log.info("*************************************************************");
         Map map = Map.of("id",id,"status",status);
         inboundRequestMapper.updateStatus(map);
     }

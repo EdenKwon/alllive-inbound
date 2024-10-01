@@ -26,7 +26,14 @@ public class InboundRequestController {
 
     @GetMapping
     public String getInboundRequests(InboundPageRequestDTO inboundPageRequestDTO, Model model, Member member) {
-        model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO, member));
+        //model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO, member));
+        //model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO, Member.builder().id(1L).roleType("ADMIN").build()));
+        model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO, Member.builder().warehouseId(3L).roleType("MANAGER").build()));
+        //model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO, Member.builder().id(1L).roleType("COMPANY").build()));
+
+        //model.addAttribute("role", "COMPANY");
+        model.addAttribute("role", "MANAGER");
+        //model.addAttribute("role", "ADMIN");
 
         return "inbound-list";
     }
@@ -36,6 +43,10 @@ public class InboundRequestController {
         log.info(id);
         inboundRequestService.findInbound(id).forEach(log::info);
         model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
+
+        //model.addAttribute("role", "COMPANY");
+        model.addAttribute("role", "MANAGER");
+        //model.addAttribute("role", "ADMIN");
 
         return "inbound-detail";
     }
@@ -100,7 +111,7 @@ public class InboundRequestController {
     }
 
     @PostMapping("/{id}/update-status") //todo rejectionNote도 같이 넘겨줘야 함
-    public String PostRequestUpdateStatus(@PathVariable Long id, @RequestParam String status, @RequestParam String rejectionNote, RedirectAttributes redirectAttributes) {
+    public String PostRequestUpdateStatus(@PathVariable Long id, @RequestParam String status, RedirectAttributes redirectAttributes) {
         log.info("update status..........");
         inboundRequestService.updateInboundStatus(id, status);
 

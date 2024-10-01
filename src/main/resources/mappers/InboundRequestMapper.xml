@@ -74,7 +74,7 @@
     <!-- _________________________________ resultMap Select _________________________________ -->
 
     <select id="findMember" resultType="allliveyoung.allliveinbound.domain.Member" resultMap="MemberResultMap">
-        SELECT * FROM Member WHERE Member_id = #{id}
+        SELECT * FROM Member WHERE member_id = #{id}
     </select>
 
     <select id="findWarehouse" resultType="allliveyoung.allliveinbound.domain.Warehouse" resultMap="WarehouseResultMap">
@@ -95,13 +95,13 @@
     <sql id="search">
         <where>
             <choose>
-                <when test="member.roleType == 'USER'">
+                <when test="member.roleType == 'COMPANY'">
                     member_id = #{member.id}
                 </when>
-                <when test="member.roleType == 'ADMIN'">
+                <when test="member.roleType == 'MANAGER'">
                     warehouse_id = #{member.warehouseId}
                 </when>
-                <when test="member.roleType == 'SUPER_ADMIN'">
+                <when test="member.roleType == 'ADMIN'">
                     <!-- 전체 조회이므로 조건 없음 -->
                 </when>
             </choose>
@@ -212,19 +212,7 @@
 
     <select id="getCount" resultType="int">
         select count(inbound_request_id) from inbound_request
-        <where>
-            <choose>
-                <when test="member.roleType == 'USER'">
-                    member_id = #{member.id}
-                </when>
-                <when test="member.roleType == 'ADMIN'">
-                    warehouse_id = #{member.warehouseId}
-                </when>
-                <when test="member.roleType == 'SUPER_ADMIN'">
-                    <!-- 전체 조회이므로 조건 없음 -->
-                </when>
-            </choose>
-        </where>
+            <include refid="search" />
     </select>
 
     <resultMap id="countInbound" type="allliveyoung.allliveinbound.web.dto.CountRequestDTO">
