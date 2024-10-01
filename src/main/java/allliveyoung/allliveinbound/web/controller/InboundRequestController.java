@@ -58,6 +58,7 @@ public class InboundRequestController {
     public String getInboundRequestUpdateForm(@PathVariable(value = "id") Long id, Model model) {
         log.info("getInboundRequestUpdateForm..........");
         model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
+
         return "inbound-modify";
     }
 
