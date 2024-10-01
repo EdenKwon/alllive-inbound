@@ -25,6 +25,7 @@ public class InboundRequestController {
 
     @GetMapping
     public String getInboundRequests(@Validated InboundPageRequestDTO inboundPageRequestDTO, BindingResult bindingResult, Model model) {
+        log.info("==+++++==============+++++++===============++++++==============");
         log.info(inboundPageRequestDTO);
         if(bindingResult.hasErrors()) {
             inboundPageRequestDTO = InboundPageRequestDTO.builder().build();

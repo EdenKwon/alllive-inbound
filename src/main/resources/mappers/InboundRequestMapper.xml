@@ -95,7 +95,6 @@
     <sql id="search">
         <where>
             <if test="types != null and types.length > 0">
-                AND (
                 <foreach collection="types" item="type" separator=" OR ">
                     <choose>
                         <when test="type == 'w'.toString()">
@@ -109,7 +108,6 @@
                         </when>
                     </choose>
                 </foreach>
-                )
             </if>
         </where>
     </sql>
