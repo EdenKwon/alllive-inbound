@@ -20,6 +20,7 @@ import java.util.List;
 public class InboundPageRequestDTO {
 
     private String[] types;
+    private String keyword;
 
     @Builder.Default
     @Min(value = 1)
