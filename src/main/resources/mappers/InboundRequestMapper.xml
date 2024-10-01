@@ -94,8 +94,20 @@
 
     <sql id="search">
         <where>
-            <if test="types != null and types.length > 0">
-                <foreach collection="types" item="type" separator=" OR ">
+            <choose>
+                <when test="member.roleType == 'USER'">
+                    member_id = #{member.id}
+                </when>
+                <when test="member.roleType == 'ADMIN'">
+                    warehouse_id = #{member.warehouseId}
+                </when>
+                <when test="member.roleType == 'SUPER_ADMIN'">
+                    <!-- 전체 조회이므로 조건 없음 -->
+                </when>
+            </choose>
+            <if test="inboundPageRequestDTO.types != null and inboundPageRequestDTO.types.length > 0">
+                AND
+                <foreach collection="inboundPageRequestDTO.types" item="type" separator=" OR " open="(" close=")">
                     <choose>
                         <when test="type == 'w'.toString()">
                             inbound_request_status = '처리대기중'
@@ -109,28 +121,16 @@
                     </choose>
                 </foreach>
             </if>
-            <if test="keyword != null">
-                <if test="types != null and types.length > 0">
-                    AND
-                </if>
-                inbound_request_code like concat('%', #{keyword}, '%')
+            <if test="inboundPageRequestDTO.keyword != null">
+                AND inbound_request_code like concat('%', #{inboundPageRequestDTO.keyword}, '%')
             </if>
         </where>
     </sql>
 
-    <select id="findAll" resultMap="InboundRequestResultMap" parameterType="allliveyoung.allliveinbound.web.dto.InboundPageRequestDTO">
+    <select id="findAll" resultMap="InboundRequestResultMap">
         SELECT * FROM INBOUND_REQUEST
         <include refid="search" />
-                 ORDER BY inbound_request_id DESC limit #{skip}, #{size}
-        <!--WHERE
-
-            <if test="warehouseId != null">
-                warehouse_id = #{warehouseId}
-            </if>
-            <if test="userId != null">
-                user_id = #{userId}
-            </if>-->
-
+        ORDER BY inbound_request_id DESC limit #{inboundPageRequestDTO.skip}, #{inboundPageRequestDTO.size}
     </select>
 
     <select id="findById" resultMap="InboundRequestProductResultMap">
@@ -212,6 +212,19 @@
 
     <select id="getCount" resultType="int">
         select count(inbound_request_id) from inbound_request
+        <where>
+            <choose>
+                <when test="member.roleType == 'USER'">
+                    member_id = #{member.id}
+                </when>
+                <when test="member.roleType == 'ADMIN'">
+                    warehouse_id = #{member.warehouseId}
+                </when>
+                <when test="member.roleType == 'SUPER_ADMIN'">
+                    <!-- 전체 조회이므로 조건 없음 -->
+                </when>
+            </choose>
+        </where>
     </select>
 
     <resultMap id="countInbound" type="allliveyoung.allliveinbound.web.dto.CountRequestDTO">

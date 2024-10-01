@@ -9,7 +9,7 @@ import java.util.*;
 
 @Mapper
 public interface InboundRequestMapper {
-    List<InboundRequest> findAll(InboundPageRequestDTO inboundPageRequestDTO);
+    List<InboundRequest> findAll(InboundPageRequestDTO inboundPageRequestDTO, Member member);
 
     List<InboundRequestProduct> findById(@Param("id") Long id);
 
@@ -26,7 +26,7 @@ public interface InboundRequestMapper {
 
     void updateStatus(Map<String, Object> map);
 
-    int getCount(InboundPageRequestDTO inboundPageRequestDTO);
+    int getCount(InboundPageRequestDTO inboundPageRequestDTO, Member member);
 
     List<Warehouse> getWarehouseList();
 

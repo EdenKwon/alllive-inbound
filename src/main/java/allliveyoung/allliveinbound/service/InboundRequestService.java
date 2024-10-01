@@ -2,13 +2,14 @@ package allliveyoung.allliveinbound.service;
 
 import allliveyoung.allliveinbound.domain.InboundRequest;
 import allliveyoung.allliveinbound.domain.InboundRequestProduct;
+import allliveyoung.allliveinbound.domain.Member;
 import allliveyoung.allliveinbound.domain.Warehouse;
 import allliveyoung.allliveinbound.web.dto.*;
 
 import java.util.List;
 
 public interface InboundRequestService {
-    InboundPageResponseDTO<InboundRequestDTO> findInbounds(InboundPageRequestDTO inboundPageRequestDTO);
+    InboundPageResponseDTO<InboundRequestDTO> findInbounds(InboundPageRequestDTO inboundPageRequestDTO, Member member);
 
     List<InboundProductDTO> findInbound(Long id);
 

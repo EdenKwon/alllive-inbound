@@ -3,6 +3,7 @@ package allliveyoung.allliveinbound.service;
 import allliveyoung.allliveinbound.config.ModelMapperConfig;
 import allliveyoung.allliveinbound.domain.InboundRequest;
 import allliveyoung.allliveinbound.domain.InboundRequestProduct;
+import allliveyoung.allliveinbound.domain.Member;
 import allliveyoung.allliveinbound.domain.Warehouse;
 import allliveyoung.allliveinbound.mapper.InboundRequestMapper;
 import allliveyoung.allliveinbound.web.dto.*;
@@ -26,11 +27,11 @@ public class InboundRequestServiceImpl implements InboundRequestService {
     private final ModelMapper modelMapper;
 
     @Override
-    public InboundPageResponseDTO<InboundRequestDTO> findInbounds(InboundPageRequestDTO inboundPageRequestDTO) {
-        List<InboundRequestDTO> requests = inboundRequestMapper.findAll(inboundPageRequestDTO).stream()
+    public InboundPageResponseDTO<InboundRequestDTO> findInbounds(InboundPageRequestDTO inboundPageRequestDTO, Member member) {
+        List<InboundRequestDTO> requests = inboundRequestMapper.findAll(inboundPageRequestDTO, member).stream()
                 .map(request -> modelMapper.map(request,InboundRequestDTO.class)).collect(Collectors.toList());
 
-        int total = inboundRequestMapper.getCount(inboundPageRequestDTO);
+        int total = inboundRequestMapper.getCount(inboundPageRequestDTO, member);
 
         InboundPageResponseDTO<InboundRequestDTO> responseDTO = InboundPageResponseDTO.<InboundRequestDTO>withAll()
                 .dtoList(requests).total(total).inboundPageRequestDTO(inboundPageRequestDTO).build();
@@ -57,10 +58,8 @@ public class InboundRequestServiceImpl implements InboundRequestService {
     @Override
     public void updateInbound(Long id, InboundRequestUpdateDTO inboundRequestUpdateDTO) {
         inboundRequestMapper.update(id);
-        log.info("들어오니이이이이이이잉");
         log.info(inboundRequestUpdateDTO.getInboundProductUpdateDTOList());
         inboundRequestMapper.updateProducts(inboundRequestUpdateDTO.getInboundProductUpdateDTOList());
-        log.info("들어오니이이이이이이잉2");
     }
 
     @Override

@@ -5,6 +5,7 @@ import allliveyoung.allliveinbound.service.InboundRequestService;
 import allliveyoung.allliveinbound.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,15 +24,10 @@ public class InboundRequestController {
 
     private final InboundRequestService inboundRequestService;
 
-    @GetMapping
-    public String getInboundRequests(@Validated InboundPageRequestDTO inboundPageRequestDTO, BindingResult bindingResult, Model model) {
-        log.info("==+++++==============+++++++===============++++++==============");
-        log.info(inboundPageRequestDTO);
-        if(bindingResult.hasErrors()) {
-            inboundPageRequestDTO = InboundPageRequestDTO.builder().build();
-        }
+    @GetMapping //하드 코딩 테스트 지워야함
+    public String getInboundRequests(InboundPageRequestDTO inboundPageRequestDTO, Model model, Member member) {
+        model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO, member));
 
-        model.addAttribute("responseDTO", inboundRequestService.findInbounds(inboundPageRequestDTO));
         return "inbound-list";
     }
 
@@ -41,6 +37,10 @@ public class InboundRequestController {
         inboundRequestService.findInbound(id).forEach(log::info);
         model.addAttribute("responseDTO", inboundRequestService.findInbound(id));
 
+        //html
+        model.addAttribute("role", "admin");
+        model.addAttribute("role", "admin");
+        model.addAttribute("role", "admin");
 
         return "inbound-detail";
     }
