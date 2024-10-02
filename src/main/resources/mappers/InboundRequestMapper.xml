@@ -207,7 +207,11 @@
     </update>
 
     <select id="updateStatus" parameterType="map">
-        UPDATE INBOUND_REQUEST SET inbound_request_status = #{status} WHERE inbound_request_id = #{id}
+        UPDATE INBOUND_REQUEST SET inbound_request_status = #{status}
+        <if test="rejectionNote != null">
+            , rejection_note = #{rejectionNote}
+        </if>
+        WHERE inbound_request_id = #{id}
     </select>
 
     <select id="getCount" resultType="int">

@@ -73,11 +73,14 @@
                         <a th:href="@{/inbound-requests}" class="btn btn-secondary" th:text="취소" style="display: inline-block; margin-right: 0.5rem;"></a>
 
                         <form id="rejectForm" th:action="@{'/inbound-requests/' + ${responseDTO.get(0).inboundRequest.id} + '/update-status'}" method="post" style="display: inline-block; margin-right: 0.5rem;" th:if="${role == 'MANAGER' and responseDTO.get(0).inboundRequest.status == '처리대기중'}">
+                            <input type="hidden" name="id" th:value="${responseDTO.get(0).inboundRequest.id}">
                             <input type="hidden" name="status" value="반려">
+                            <input type="hidden" name="rejectionNote" id="rejectionNote">
                             <button class="btn btn-danger" type="submit" onclick="handleReject()">반려</button>
                         </form>
 
                         <form id="approveForm" th:action="@{'/inbound-requests/' + ${responseDTO.get(0).inboundRequest.id} + '/update-status'}" method="post" style="display: inline-block; margin-right: 0.5rem;" th:if="${role == 'MANAGER' and responseDTO.get(0).inboundRequest.status == '처리대기중'}">
+                            <input type="hidden" name="id" th:value="${responseDTO.get(0).inboundRequest.id}">
                             <input type="hidden" name="status" value="승인">
                             <button class="btn btn-success" type="submit">승인</button>
                         </form>
@@ -90,26 +93,16 @@
                             <button class="btn btn-danger" type="submit">삭제</button>
                         </form>
                     </div>
-                </div>
-            </div>
-        </div>
 
-    </div>
-
-    <script>
-        function handleReject() {
-            var reason = prompt("반려 사유를 작성해주세요:");
-            if (reason) {
-                var rejectForm = document.getElementById("rejectForm");
-                var reasonInput = document.createElement("input");
-                reasonInput.type = "hidden";
-                reasonInput.name = "rejectionNote";
-                reasonInput.value = reason;
-                rejectForm.appendChild(reasonInput);
-                rejectForm.submit();
-            }
-        }
-    </script>
+                    <script>
+                        function handleReject() {
+                            var reason = prompt("반려 사유를 작성해주세요:");
+                            if (reason) {
+                                document.getElementById("rejectionNote").value = reason;
+                                document.getElementById("rejectForm").submit();
+                            }
+                        }
+                    </script>
 </section>
 
 </html>

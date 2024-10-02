@@ -69,10 +69,9 @@ public class InboundRequestServiceImpl implements InboundRequestService {
     }
 
     @Override
-    public void updateInboundStatus(Long id, String status) {
+    public void updateInboundStatus(InboundStatusUpdateDTO inboundStatusUpdateDTO) {
         log.info("*************************************************************");
-        Map map = Map.of("id",id,"status",status);
-        inboundRequestMapper.updateStatus(map);
+        inboundRequestMapper.updateStatus(inboundStatusUpdateDTO);
     }
 
     @Override

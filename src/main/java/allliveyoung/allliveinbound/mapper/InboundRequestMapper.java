@@ -24,7 +24,7 @@ public interface InboundRequestMapper {
 
     void delete(Long id);
 
-    void updateStatus(Map<String, Object> map);
+    void updateStatus(InboundStatusUpdateDTO inboundStatusUpdateDTO);
 
     int getCount(InboundPageRequestDTO inboundPageRequestDTO, Member member);
 

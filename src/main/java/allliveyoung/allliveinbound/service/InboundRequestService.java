@@ -19,7 +19,7 @@ public interface InboundRequestService {
 
     void deleteInbound(Long id);
 
-    void updateInboundStatus(Long id, String status);
+    void updateInboundStatus(InboundStatusUpdateDTO inboundStatusUpdateDTO);
 
     List<WarehouseDTO> getWarehouseList();
 
